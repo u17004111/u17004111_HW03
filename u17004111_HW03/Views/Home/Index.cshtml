@@ -1,0 +1,73 @@
+﻿@model _272_hw03_final_rev2.Models.FileModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<div>
+    <br />
+    <div class="row">
+        <div class="col-7 border-right">
+            <h2>Upload Files</h2>
+            <h4>Please select your desired files to upload, and their filetype.</h4>
+            <p>
+                The purpose of this homework assignment was to teach us how to use the MVC ideology, to create responsive webapps.
+                <br />
+                The functionality I implemented includes:
+                <ul>
+                    <li>Being able to upload vides, images or other files</li>
+                    <li>Specifying which filetype we are uploading</li>
+                    <li>Displaying the uploaded files, with images being visible and videos being playable</li>
+                    <ul>
+                        <li>Using the jQuery FancyBox to display videos and images</li>
+                    </ul>
+                    <li>Being able to download or delete files that have been uploaded</li>
+                </ul>
+                On this homepage, the user is able to select a file to upload, and a filetype for that file. The filetype selected
+                determines in which folder the uploaded file is stored. This is important, because a video uploaded as a 'Document'
+                will not be playable on the Documents page. This logic extends to images being uploaded as videos or documents,
+                and documents being uploaded as images or videos.
+                <br />
+                The uploaded files will then become visible in one of three relevant pages - Documents, Images or Videos.
+                <br />
+                There the user is able to browse uploaded documents, view images and play videos, respectively.
+            </p>
+        </div>
+        <div class="col-5 align-content-center">
+            @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+            <div>
+                <!-- Radio buttons to capture what type of file is being uploaded -->
+                <br />
+                <div>
+                    <input class="radioBtn" type="radio" name="radio" id="doc" checked/><span> Document</span>
+                    <br />
+                    <input class="radioBtn" type="radio" name="radio" id="img" /><span> Image</span>
+                    <br />
+                    <input class="radioBtn" type="radio" name="radio" id="vid" /><span> Video</span>
+                    <br />
+                    <br />
+                </div>
+
+                <!-- Standard browse file and upload form section -->
+                <div>
+                    <input type="file" name="File" />
+                    <br />
+                    <br />
+                    <input type="submit" value="Upload" class=" btn btn-primary" />
+                </div>
+            </div>
+                @Html.Hidden("selectedRadio")
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#selectedRadio").val("doc");
+
+    $(".radioBtn").on("click", function () {
+        $("#selectedRadio").val(this.id);
+    });
+</script>
+
+
